@@ -31,35 +31,13 @@ int rem_file(int arg,char *argv[])
    
 }
 
-/*int check_empty_dir(char *directory) {
-  struct dirent *dirstruct;
-  DIR *dirptr = opendir(directory);
-  int counter=0;
-  if (dirptr == NULL) 
-  {
-    printf("\nThis Directory does not exist");
-    return 1;
-  }
-  while ((dirstruct = readdir(directory)) != NULL) {
-    if(++counter > 2)
-      break;
-  }
-  closedir(directory);
-  if (counter <= 2) //Directory Empty
-    return 2;
-  else
-    return 0;
-}*/
 
 int rem_empty_dir(int arg,char *argv[])
 {
 char *dirname=NULL;
 dirname=argv[2];
 printf("\n%s",dirname);
-//int check=check_empty_dir(dirname);
-//printf("\nCheck-->%i",check);
-//if(check==2)
-//{
+
  int check = rmdir(dirname);
  if (!check)
       printf("\nDirectory Succesfully Deleted\n");
@@ -131,8 +109,8 @@ exit(2);
 }
 
 
-strcpy(arg1,"-l");
-strcpy(arg2,"-d");
+strcpy(arg1,"-d");
+strcpy(arg2,"-r");
 if((strcmp(arg1,argv[1])!=0)&&(strcmp(arg2,argv[1])!=0))
 {
 
@@ -152,6 +130,7 @@ if(returnval == 0)
 if((strcmp(arg1,argv[1])==0)&&argc>2)
 {
 
+printf("\nRemoving Empty Directory\n");
 rem_empty_dir(argc,argv);
 return(0);
 
